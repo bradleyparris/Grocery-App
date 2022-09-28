@@ -65,6 +65,37 @@ deleteUser({params}, res) {
         res.json(dbUserData);
     })
     .catch(err => res.status(400).json(err));
+},
+
+loginUser(req, res) {
+    User.find({
+            email: req.body.email
+    }).then(dbUserData => {
+        if (!dbUserData) {
+          res.status(400).json({ message: 'No user with that email address!' });
+          return;
+        }
+    
+        res.json({ user: dbUserData });
+    
+       // Verify user
+    
+      });  
+
+//       User.findById({
+//         _id: params.id
+// }).then(dbUserData => {
+//     console.log(dbUserData);
+//     if (!dbUserData) {
+//       res.status(400).json({ message: 'No user with that email address!' });
+//       return;
+//     }
+
+//     res.json({ user: dbUserData });
+
+//     // Verify user
+
+//   });  
 }
 
 

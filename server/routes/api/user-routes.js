@@ -5,7 +5,8 @@ getAllUsers,
 getUserById,
 createUser,
 updateUser,
-deleteUser
+deleteUser,
+loginUser
 } = require('../../controllers/user-controller');
 
 //Setting up the GET all and POST routes at /api/users
@@ -20,6 +21,10 @@ router
 .get(getUserById)
 .put(updateUser)
 .delete(deleteUser);
+
+router
+.route('/login')
+.post(loginUser);
 
 //exporting to be used in the server
 module.exports = router;
