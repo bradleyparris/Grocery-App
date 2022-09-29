@@ -6,7 +6,7 @@ export default function Products({ category }){
 
     return (
         <section>
-            <h1>...................{capitalizeFirstLetter(name)} Section...............</h1>
+            <h1>{capitalizeFirstLetter(name)} Section</h1>
         </section>
     )
 }

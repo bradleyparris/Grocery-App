@@ -15,7 +15,7 @@ export default function Sidebar (props) {
     }, [currentCategory]);
 
     return (
-        <section>
+        <article>
             <ul>
                 {categories.map((category) => (
                     <li
@@ -31,6 +31,6 @@ export default function Sidebar (props) {
                     </li>
                 ))}
             </ul>
-        </section>
+        </article>
     );
 };
