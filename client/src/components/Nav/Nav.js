@@ -1,10 +1,13 @@
 
-import React, { useEffect } from 'react';
-import { capitalizeFirstLetter } from "../../utils/helpers";
+import React from 'react';
 
 
-export default function Nav(){
-    
+export default function Nav(props){
+    const {
+        accountSelected,
+        setAccountSelected
+    } = props;
+
     return (
         <header>
             <div className='hero'>
@@ -14,6 +17,16 @@ export default function Nav(){
                             <h1 className='title'>Paradise Produce</h1>
                         </div>
                         <nav>
+                            <div className='column'>
+                                <span className={`${accountSelected}`} onClick={() => setAccountSelected(false)}>
+                                    Shop
+                                </span>
+                            </div>
+                            <div className='column'>
+                                <span onClick={() => setAccountSelected(true)}>
+                                    Account
+                                </span>
+                            </div> 
                             <div className='column'>
                                 <button className='button is-pulled-right'>
                                     <i className='fa fa-shopping-cart'></i>

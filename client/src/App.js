@@ -2,39 +2,29 @@ import React, { useState } from 'react';
 import './App.css';
 import Nav from './components/Nav/Nav';
 import 'bulma/css/bulma.min.css';
-import Sidebar from './components/Sidebar/Sidebar';
+import Shop from './components/Shop/Shop';
+import AccountInfo from './components/Account/Account';
 
 function App() {
+    const [accountSelected, setAccountSelected] = useState();
 
-  const [categories] = useState([
-      {
-          name: "Dairy", 
-      },
-      {
-          name: "Meat",
-      },
-      {
-          name: "Produce",
-      },
-      {
-          name: "Dessert",
-      }
-  ]);
-
-  const [currentCategory, setCurrentCategory] = useState(categories[0]);
-  
-
-  return (
-    
-    <Nav></Nav>
-
-    <main>
-        <Sidebar currentCategory={currentCategory}></Sidebar>
-    </main>
-
-
-   
-  );
+    return (
+        <div>
+            <Nav
+            accountSelected={accountSelected}
+            setAccountSelected={setAccountSelected}
+            ></Nav>
+            <main>
+            {!accountSelected ? (
+                <>
+                    <Shop></Shop>
+                </>
+            ) : (
+                <AccountInfo></AccountInfo>
+            )}
+            </main>
+        </div>
+    );
 }
 
 export default App;
