@@ -45,6 +45,16 @@ Produce.findOneAndDelete({_id: params.produceId})
     res.json(dbProduceData);
 })
 .catch(err => res.json(err));
+},
+
+getAllProduce(req, res) {
+    Produce.find({})
+
+    .then(dbUserData => res.json(dbUserData))
+    .catch(err => {
+        console.log(err);
+        res.status(400).json(err);
+    });
 }
 
 };

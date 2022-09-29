@@ -1,6 +1,7 @@
 const router = require('express').Router();
-const {addProduce, removeProduce} = require('../../controllers/produce-controller');
+const {addProduce, removeProduce, getAllProduce} = require('../../controllers/produce-controller');
 
+router.route('/').get(getAllProduce);
 
 // api/produces/userId
 //POST a produce
