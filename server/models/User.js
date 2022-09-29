@@ -21,18 +21,28 @@ const UserSchema = new Schema({
         allowNull: false
       },
 
+      produces: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Produce'
+        }
+      ]
+
      
 });
 
-// UserSchema.pre('save', async function save(next) {
-//     if(!this.isModified('password')) return next();
-//     try{
-//         this.password = await bcrypt.hash(UserSchema.password, 10);
-//             return next();
-//     }catch (err) {
-//     return next(err);
-//     }
-// })
+UserSchema.pre('save', async function save(next) {
+    var user = this;
+    if(!user.isModified('password')) return next();
+    try{
+         bcrypt.hash(user.password, 10);
+           if(err) return next(err);
+
+           user.password = hash;
+    }catch (err) {
+    return next(err);
+    }
+})
 
 // {
 //     hooks: {
