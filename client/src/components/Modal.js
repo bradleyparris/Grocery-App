@@ -1,6 +1,6 @@
 import React from 'react';
-import Login from '../Login/Login';
-import Signup from '../SignUp/Signup';
+import Login from './Login';
+import Signup from './Signup';
 
 export default function LogSignModal({ onClose }){
     return(

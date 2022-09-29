@@ -1,5 +1,5 @@
 import React from 'react';
-import { capitalizeFirstLetter } from '../../utils/helpers';
+import { capitalizeFirstLetter } from '../utils/helpers';
 
 export default function Products({ category }){
     const { name } = category;

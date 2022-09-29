@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Sidebar from '../Sidebar/Sidebar';
-import Products from '../Products/Product';
+import Sidebar from './Sidebar';
+import Products from './Product';
 
 export default function Shop(){
     const [categories] = useState([

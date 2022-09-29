@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
-import Nav from './components/Nav/Nav';
-import Shop from './components/Shop/Shop';
-import AccountInfo from './components/Account/Account';
+import Nav from './components/Nav';
+import Shop from './components/Shop';
+import AccountInfo from './components/Account';
 
 function App() {
     const [accountSelected, setAccountSelected] = useState();

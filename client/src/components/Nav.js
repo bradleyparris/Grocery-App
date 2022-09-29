@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LogSignModal from '../Modal/Modal';
+import LogSignModal from './Modal';
 
 export default function Nav(props){
     const {
