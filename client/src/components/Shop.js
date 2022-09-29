@@ -24,7 +24,7 @@ export default function Shop(){
     // Products go under Sidebar
 
     return(
-        <div>
+        <div id='shop-div'>
             <Sidebar
             categories={categories}
             currentCategory={currentCategory}

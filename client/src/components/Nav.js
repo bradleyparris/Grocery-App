@@ -15,7 +15,13 @@ export default function Nav(props){
 
     return (
         <header>
-            <h1 id="webTitle" className=''>Paradise Produce</h1>
+            <div id='logo-div'>
+                <img id='logo' src={require('../assets/Paradise-Orange.png')}></img>
+                <h1 id="webTitle" className=''>Paradise Produce</h1>
+            </div>
+            <div id='hamburger-btn'>
+                <i className='fa fa-bars'></i>
+            </div>
             <nav>
                 <span className={`${accountSelected} shop`} onClick={() => setAccountSelected(false)}>
                     Shop

@@ -19,10 +19,10 @@ export default function Sidebar (props) {
             <ul>
                 {categories.map((category) => (
                     <li
-                        className={`${currentCategory.name === category.name}`}
+                        className={`${currentCategory.name === category.name}-shop-category`}
                         key={category.name}
                     >
-                        <span onClick={() => {
+                        <span className='shop-category' onClick={() => {
                             setCurrentCategory(category);
                             }}
                         >
