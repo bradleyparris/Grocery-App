@@ -26,7 +26,33 @@ const UserSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'Produce'
         }
+      ],
+
+      dairy: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Dairy'
+        }
+      ],
+      meats: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Meat'
+        }
+      ],
+      starch: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Starch'
+        }
+      ],
+      packagedGoods: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Goods'
+        }
       ]
+
 
      
 });

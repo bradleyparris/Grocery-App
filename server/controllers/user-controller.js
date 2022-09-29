@@ -6,6 +6,21 @@ const userController = {
 //get all the users
 getAllUsers(req, res) {
     User.find({})
+    .populate([{
+        path: 'produces',
+        select: '-__v'
+    },
+    {
+        path: 'dairy',
+        select: '-__v'
+    },
+    {
+        path: 'meats',
+        select: '-__v'
+    }])
+
+    .select('-__v')
+    .sort({_id: -1})
     .then(dbUserData => res.json(dbUserData))
     .catch(err => {
         console.log(err);
@@ -16,6 +31,11 @@ getAllUsers(req, res) {
 //get user by Id
 getUserById({params}, res) {
 User.findOne({_id: params.id})
+.populate({
+    path: 'produces',
+    select: '-__v'
+})
+.select('-__v')
 .then(dbUserData => {
     //if no user is found, send 404
     if(!dbUserData) {
@@ -67,6 +87,7 @@ deleteUser({params}, res) {
     .catch(err => res.status(400).json(err));
 },
 
+//login the user
 loginUser(req, res) {
     User.find({
             email: req.body.email
