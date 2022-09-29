@@ -40,6 +40,38 @@ nav {
   justify-content: space-around;
 }
 
+.modalBackdrop {
+  background-color: rgba(96, 96, 96, 0.774);
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.modalContainer {
+  background: rgb(255, 200, 0);
+  border-radius: 5px;
+  max-width: 100%;
+  margin: 50px auto;
+  padding: 15px;
+  width: 960px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-div, .signup-div, #login-form, #signup-form, #login-form div, #signup-form div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
 @media only screen and (max-width: 280px) {
   header{
     height: 50px;

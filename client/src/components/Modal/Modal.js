@@ -2,7 +2,7 @@ import React from 'react';
 import Login from '../Login/Login';
 import Signup from '../SignUp/Signup';
 
-export default function LogSignModal(){
+export default function LogSignModal({ onClose }){
     return(
         <div className='modalBackdrop'>
             <div className='modalContainer'>
@@ -15,7 +15,7 @@ export default function LogSignModal(){
                     <h3 className='signup-title title'>Signup Form</h3>
                     <Signup></Signup>
                 </div>
-                <button type='button'>CLose</button>
+                <button onClick={onClose} type='button'>Close</button>
             </div>
         </div>
     );
