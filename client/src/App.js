@@ -1,25 +1,30 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Nav from './components/Nav';
+import Shop from './components/Shop';
+import AccountInfo from './components/Account';
+import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [accountSelected, setAccountSelected] = useState();
+
+    return (
+        <div className='body-div'>
+            <Nav
+            accountSelected={accountSelected}
+            setAccountSelected={setAccountSelected}
+            ></Nav>
+            <main>
+            {!accountSelected ? (
+                <>
+                    <Shop></Shop>
+                </>
+            ) : (
+                <AccountInfo></AccountInfo>
+            )}
+            </main>
+        </div>
+    );
 }
 
 export default App;
