@@ -1,18 +1,8 @@
 //Meant for seeding database
-//Following this article ex https://plainenglish.io/blog/seeding-mongodb-database-from-node-the-simplest-way
-const mongoose = require('mongoose');
-const Produce = require('../../server/models/Produce');
+//Have multiple seeds in this File example user, meat, cheeese
+const mongoose = require('../config/connection');
+const Produce = require('../models/Produce');
 
-mongoose
-.connect('mongodb://127.0.0.1:27017/Grocery-App', {
-    useNewUrlParser: true, useUnifiedTopology: true
-})
-.then(() => {
-    console.log('Mongo connection open!!');
-})
-.catch((err) => {
-console.log(err);
-});
 
 const seedProduce = [
     {
@@ -43,5 +33,5 @@ const seedDB = async () => {
 };
 
 seedDB().then(() => {
-    mongoose.connection.close();
+    mongoose.close();
 })
