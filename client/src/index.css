@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-align: center;
 }
 
 code {
@@ -19,8 +20,36 @@ code {
 .body-div{
   width: 100%;
 }
-main, #logo-div{
+main, #logo-div, .container-product{
   display: flex;
+}
+.container-product{
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+#logo-div{
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+}
+#x-marke-nav {
+  display: none;
+}
+.card {
+  margin: 0px;
+  height: 200px;
+  width: 190px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px; /* 5px rounded corners */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 header {
   background-color: black;
@@ -29,16 +58,41 @@ header {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  height: 70px;
+}
+#product-row{
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+}
+.product-price{
+  width: fit-content;
+  margin: 0;
 }
 #logo{
   border-radius: 6px;
   margin-right: 5px;
+  height: 50px;
+}
+.product-name{
+  margin: 0;
 }
 #webTitle {
   margin: 0;
   color: orange;
-  width: 200px;
+  width: 250px;
   text-align: center;
+  font-size: 25px;
+}
+#hamburger-btn, .hamburg, #x-mark-nav{
+  width: 30px;
+  height: 30px;
+  display: none;
+}
+.hamburg{
+  justify-content: center;
+  align-items: center;
 }
 nav {
   width: 60%;
@@ -46,6 +100,9 @@ nav {
   justify-content: space-around;
 }
 
+#product-row{
+  padding: 10px;
+}
 .modalBackdrop {
   background-color: rgba(96, 96, 96, 0.774);
   bottom: 0;
@@ -74,12 +131,18 @@ nav {
 .login-div, .signup-div, #login-form, #signup-form, #login-form div, #signup-form div, #shop-div, #shop-div ul{
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
-
-#shop-div article{
+#shop-div{
+  flex-direction: row;
   width: 100%;
+}
+section{
+  width: 100%;
+}
+#shop-div article{
+  width: 200px;
   background-color: rgb(0, 153, 0);
 }
 
@@ -100,16 +163,38 @@ nav {
   border-color: rgb(0, 71, 0);
 }
 
-@media only screen and (max-width: 280px) {
-  main {
+@media only screen and (max-width: 990px){
+  .modalContainer{
+    width: 90%;
+  }
+  #shop-div{
     flex-direction: column;
-    height: fit-content;
+    justify-content: flex-start;
+  }
+  #shop-div article, #shop-div article ul{
+    flex-direction: row;
+    width: 100%;
   }
   #shop-div ul, article, #shop-div{
     height: 30px;
   }
-  #shop-div{
-    justify-content: flex-start;
+  #shop-div ul{
+    align-items: center;
+    justify-content: space-around;
+  }
+  #shop-div ul li{
+    height: 28px;
+    padding: 0 5%;
+  }
+  #webTitle{
+    width: 220px;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  main {
+    flex-direction: column;
+    height: fit-content;
   }
   header{
     height: 50px;
@@ -122,7 +207,7 @@ nav {
     margin: 0;
   }
   nav{
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
@@ -138,11 +223,30 @@ nav {
     flex-direction: row;
   }
   #shop-div ul li{
-    height: 28px;
     padding: 0 10px;
   }
-  #logo{
+  #logo, #x-mark-nav{
     height: 25px;
+  }
+  #hamburger-btn, .hamburg, #x-mark-nav{
+    display: flex;
+  }
+  #x-mark-nav {
+    color: black;
+    z-index: 2;
+    width: 25px;
+    align-items: center;
+    justify-content: center;
+  }
+  .x-btn{
+    height: 20px;
+    width: 40px
+  }
+  .show{
+    display: flex;
+  }
+  .hide{
+    display: none;
   }
   .shop-category{
   }

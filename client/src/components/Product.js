@@ -47,20 +47,30 @@ export default function Products({ category }){
     return (
         <section>
             <h1>{capitalizeFirstLetter(name)} Section</h1>
-            {/* <div id='product-row row'>
-                {items.map(product => (
-                    <div className='product-item card' key={product.productName}>
-                        <h4 className='product-name'>{product.productName}</h4>
+            <div id='product-row'>
+                {/* {items.map(product => ( */}
+                    <div className='product-item card' /*key={product.productName}*/>
                         <img className='product-img'
                             src={require(`../assets/Paradise-Orange.png`)}
                         />
-                        <div className='product-info'>
-                            <p className='product-price'>${product.price}</p>
+                        <h4 className='product-name'>TEST PRODUCT HAHAHAHAHHAHAH</h4>
+                        <div className='container-product'>
+                            <p className='product-price'>$MONEH</p>
                             <span className='add-to-cart'>Add to Cart</span>
                         </div>
                     </div>
-                ))}
-            </div> */}
+                    <div className='product-item card' /*key={product.productName}*/>
+                        <img className='product-img'
+                            src={require(`../assets/Paradise-Orange.png`)}
+                        />
+                        <h4 className='product-name'>TEST PRODUCT HAHAHAHAHHAHAH</h4>
+                        <div className='container-product'>
+                            <p className='product-price'>$MONEH</p>
+                            <span className='add-to-cart'>Add to Cart</span>
+                        </div>
+                    </div>
+                {/* ))} */}
+            </div>
         </section>
     )
 }

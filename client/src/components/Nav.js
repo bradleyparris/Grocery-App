@@ -8,10 +8,15 @@ export default function Nav(props){
     } = props;
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [navMobile, setNavMobile] = useState(false);
 
     const toggleModal = () => {
         setIsModalOpen(!isModalOpen);
-    }
+    };
+
+    const toggleNav = () => {
+        setNavMobile(!navMobile);
+    };
 
     return (
         <header>
@@ -20,9 +25,10 @@ export default function Nav(props){
                 <h1 id="webTitle" className=''>Paradise Produce</h1>
             </div>
             <div id='hamburger-btn'>
-                <i className='fa fa-bars'></i>
+                <i className='fa fa-bars hamburg' onClick={() => toggleNav()}></i>
             </div>
-            <nav>
+            <nav className={navMobile ? 'show':'hide'}>
+                <i className='fa-solid fa-square-minus' id='x-mark-nav' onClick={()=> toggleNav()}></i>
                 <span className={`${accountSelected} shop`} onClick={() => setAccountSelected(false)}>
                     Shop
                 </span>
