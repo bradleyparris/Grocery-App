@@ -1,6 +1,6 @@
 const { gql } = require('apollo-server-express');
 
-
+//TYPE Query is used for the resolvers to make the GET requests
 const typeDefs = gql`
 type User {
   _id: ID
@@ -14,9 +14,15 @@ type User {
   packagedGoods: [Goods]
 }
 
+type Auth {
+  token: ID!
+  user: User
+}
+
 type Produce {
   _id: ID
   produceName: String
+  consumer: String
   produceDescription: String
 }
 
@@ -45,35 +51,20 @@ type Goods{
 }
 
   type Query {
+    me: User
     users: [User]
     user(_id: ID!): User
     produces: [Produce]
     produce(_id: ID!): Produce
+  
 
   }
+
+  type Mutation {
+    login(email: String!, password: String!): Auth
+    addUser(userName: String!, email: String!, password: String!): Auth
+    addProduce(produceName: String!, consumer: String, produceDescription: String!): Produce
+}
 `;
-// const typeDefs = gql`
-//   type User {
-//     _id: ID
-//     username: String
-//     email: String
-//   }
-
-//   type Auth {
-//     token: ID!
-//     user: User
-//   }
-
-//   type Query {
-//     me: User
-//     users: [User]
-//     user(username: String!): User
-//   }
-
-//   type Mutation {
-//     login(email: String!, password: String!): Auth
-//     addUser(username: String!, email: String!, password: String!): Auth
-//   }
-// `;
 
 module.exports = typeDefs;

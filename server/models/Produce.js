@@ -8,6 +8,12 @@ const ProduceSchema = new Schema({
         trim: true
     },
 
+    consumer: {
+        type: String,
+        unique: true,
+        trim: true
+    },
+
     // price: {
     //     type: Integer,
     //     unique: true,
