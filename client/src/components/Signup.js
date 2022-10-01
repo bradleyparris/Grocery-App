@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { validateEmail } from '../utils/helpers';
+import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../utils/mutations';
 
 export default function Signup(){
     const [formState, setFormState] = useState({ username: '', email: '', password: '', reEnter: '' });
 
-    const { username, email, password, reEnter } = formState;
+    const [addUser, { error }] = useMutation(ADD_USER);
+
+    const { username, email, password, /*reEnter*/ } = formState;
 
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -29,12 +33,20 @@ export default function Signup(){
         }
     };
 
-    function handleSubmit(e){
+    const handleSubmit = async e => {
         e.preventDefault();
-        console.log(formState);
+        try {
+            const { data } = await addUser({
+                variables: { ...formState }
+            });
+            console.log(data);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return(
+        <div id='signup-div'>
         <form id='signup-form' onSubmit={handleSubmit}>
             <div>
                 <label htmlFor='username'>Username:</label>
@@ -48,11 +60,13 @@ export default function Signup(){
                 <label htmlFor='password'>Password:</label>
                 <input type='password' name='password' defaultValue={password}/>
             </div>
-            <div>
+            {/* <div>
                 <label htmlFor='reEnterPass'>Re-enter Password:</label>
                 <input type='password' name='reEnterPass' defaultValue={reEnter}/>
-            </div>
+            </div> */}
             <button id='signup-button' className='btn' type='submit'>Signup</button>
         </form>
+            {error && <div>Sign up failed</div>}
+        </div>
     );
 }

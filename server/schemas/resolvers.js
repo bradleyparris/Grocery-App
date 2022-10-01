@@ -15,8 +15,49 @@ const resolvers = {
       return Produce.find();
     }
 
-  }
+  },
+  Mutation: {
+    //Have a signed token with users data
+    //CREATE a user with args(object of the values passed into a query/mutation request as parameters)
+    addUser: async (parent, args) => {
+        const user = await User.create(args);
+        const token = signToken(user);
+        return {token, user};
+    },
+    //Authenticate login by checking to see if email and password are correct
+    login: async (parent, {email, password}) => {
+      const user = await User.findOne({email});
 
+      if(!user) {
+          throw new AuthenticationError('Incorrect credentials');
+      }
+
+      const correctPw = await user.isCorrectPassword(password);
+
+      if(!correctPw) {
+          throw new AuthenticationError('Incorrect credentials');
+      }
+
+      const token = signToken(user);
+      return {token, user};
+    },
+
+    addProduct: async (parent, args, context) => {
+      if (context.user) {
+        const product = await Produce.create({ ...args, consumer: context.user.username });
+
+        await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { produces: product._id } },
+          { new: true }
+        );
+
+        return product;
+      }
+
+      throw new AuthenticationError('You need to be logged in!');
+    }
+}
 };
 
 //   Query: {

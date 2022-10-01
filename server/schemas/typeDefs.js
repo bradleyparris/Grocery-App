@@ -51,6 +51,15 @@ type Goods{
     produce(_id: ID!): Produce
 
   }
+  type Mutation {
+    login(email: String!, password: String!): Auth
+    addUser(userName: String!, email: String!, password: String!): Auth
+    addProduct(produceName: String!, consumer: String, produceDescription: String!, category: String!): Produce
+  }
+  type Auth {
+    token: ID!
+    user: User
+  }
 `;
 // const typeDefs = gql`
 //   type User {
@@ -59,10 +68,7 @@ type Goods{
 //     email: String
 //   }
 
-//   type Auth {
-//     token: ID!
-//     user: User
-//   }
+  
 
 //   type Query {
 //     me: User
