@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
-import Nav from './components/Nav';
+import Header from './components/Header';
 import Shop from './components/Shop';
-import AccountInfo from './components/Account';
+import AccountInfo from './pages/Account';
+import LogSignModal from './pages/Modal';
+import NoMatch from './pages/NoMatch';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 
 const httpLink = createHttpLink({
@@ -19,21 +22,34 @@ function App() {
 
     return (
         <ApolloProvider client={client}>
-            <div className='body-div'>
-                <Nav
-                accountSelected={accountSelected}
-                setAccountSelected={setAccountSelected}
-                ></Nav>
-                <main>
-                {!accountSelected ? (
-                    <>
-                        <Shop></Shop>
-                    </>
-                ) : (
-                    <AccountInfo></AccountInfo>
-                )}
-                </main>
-            </div>
+            <Router>
+                <div className='body-div'>
+                    <Header
+                    accountSelected={accountSelected}
+                    setAccountSelected={setAccountSelected}
+                    ></Header>
+                    <main>
+                    <Routes>
+                        <Route
+                            path='/login-or-signup'
+                            element={<LogSignModal />}
+                        />
+                        <Route
+                            path='/'
+                            element={<Shop />}
+                        />
+                        <Route
+                            path='/account'
+                            element={<AccountInfo />}
+                        />
+                        <Route
+                            path='*'
+                            element={<NoMatch />}
+                        />
+                    </Routes>
+                    </main>
+                </div>
+            </Router>
         </ApolloProvider>
     );
 }

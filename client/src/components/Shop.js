@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import Product from './Product';
 import Sidebar from './Sidebar';
-import Products from './Product';
+import { Route, Link } from 'react-router-dom';
+import { capitalizeFirstLetter } from '../utils/helpers';
 
 export default function Shop(){
     const [categories] = useState([
@@ -17,20 +19,17 @@ export default function Shop(){
             name: "dessert",
         }
     ]);
-  
-    const [currentCategory, setCurrentCategory] = useState(categories[0]);
-
-
+    
     // Products go under Sidebar
-
+    const [currentCategory, setCurrentCategory] = useState(categories[0]);
     return(
         <div id='shop-div'>
             <Sidebar
-            categories={categories}
-            currentCategory={currentCategory}
-            setCurrentCategory={setCurrentCategory}
+                categories={categories}
+                currentCategory={currentCategory}
+                setCurrentCategory={setCurrentCategory}
             ></Sidebar>
-            <Products category={currentCategory}></Products>
+            <Product category={currentCategory}></Product>
         </div>
     )
 }

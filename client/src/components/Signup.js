@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 
 export default function Signup(){
-    const [formState, setFormState] = useState({ username: '', email: '', password: '', reEnter: '' });
+    const [formState, setFormState] = useState({ username: '', email: '', password: ''});
 
     const [addUser, { error }] = useMutation(ADD_USER);
 
@@ -12,16 +12,16 @@ export default function Signup(){
 
     const [errorMessage, setErrorMessage] = useState('');
 
-    function handleChange(e) {
-        if(e.target.name === 'email'){
-            const isValid = validateEmail(e.target.value);
+    function handleChange(event) {
+        if(event.target.name === 'email'){
+            const isValid = validateEmail(event.target.value);
             console.log(isValid);
 
             if(!isValid) {
                 setErrorMessage('Your email is invalid.');
             } else {
-                if(!e.target.value.length){
-                    setErrorMessage(`${e.target.name} is required.`);
+                if(!event.target.value.length){
+                    setErrorMessage(`${event.target.name} is required.`);
                 } else {
                     setErrorMessage('');
                 }
@@ -29,19 +29,19 @@ export default function Signup(){
         }
 
         if(!errorMessage) {
-            setFormState({ ...formState, [e.target.name]: e.target.value });
+            setFormState({ ...formState, [event.target.name]: event.target.value });
         }
     };
 
-    const handleSubmit = async e => {
-        e.preventDefault();
+    const handleSubmit = async event => {
+        event.preventDefault();
         try {
             const { data } = await addUser({
                 variables: { ...formState }
             });
             console.log(data);
-        } catch (err) {
-            console.log(err);
+        } catch (e) {
+            console.log(e);
         }
     };
 
@@ -64,9 +64,14 @@ export default function Signup(){
                 <label htmlFor='reEnterPass'>Re-enter Password:</label>
                 <input type='password' name='reEnterPass' defaultValue={reEnter}/>
             </div> */}
+            {errorMessage && (
+                <div className='error-div'>
+                    <p className='error-text'>{errorMessage}</p>
+                </div>
+            )}
             <button id='signup-button' className='btn' type='submit'>Signup</button>
         </form>
-            {error && <div>Sign up failed</div>}
+            {console.log(error) && error && <div>Sign up failed</div>}
         </div>
     );
 }
