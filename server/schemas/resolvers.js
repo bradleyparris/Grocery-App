@@ -6,9 +6,15 @@ const {User, Produce} = require('../models');
 const resolvers = {
 
   Query: {
-    produce: async () => {
+    users: async (parent, {userName}) => {
+      const params = userName ? {userName} : {};
+      return User.find(params)
+    },
+
+    produces: async () => {
       return Produce.find();
     }
+
   }
 
 };

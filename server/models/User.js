@@ -57,28 +57,20 @@ const UserSchema = new Schema({
      
 });
 
-UserSchema.pre('save', async function save(next) {
-    var user = this;
-    if(!user.isModified('password')) return next();
-    try{
-         bcrypt.hash(user.password, 10);
-           if(err) return next(err);
+// set up pre-save middleware to create password
+UserSchema.pre('save', async function(next) {
+  if (this.isNew || this.isModified('password')) {
+    const saltRounds = 10;
+    this.password = await bcrypt.hash(this.password, saltRounds);
+  }
 
-           user.password = hash;
-    }catch (err) {
-    return next(err);
-    }
-})
+  next();
+});
 
-// {
-//     hooks: {
-//         //setting up hooks to hash password
-//         async beforeCreate(UserSchema) {
-//             UserSchema.password = await bcrypt.hash(UserSchema.password, 10);
-//             return UserSchema;
-//         }
-//             }
-// }
+// compare the incoming password with the hashed password
+UserSchema.methods.isCorrectPassword = async function(password) {
+  return bcrypt.compare(password, this.password);
+};
 
 
 
