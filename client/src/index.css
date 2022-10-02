@@ -59,8 +59,6 @@ header {
   justify-content: space-evenly;
   align-items: center;
   height: 70px;
-  position: fixed;
-  top:0;
 }
 #product-row{
   display: flex;
@@ -142,16 +140,11 @@ nav {
   width: 100%;
 }
 section{
-  width: 80%;
-  position: fixed;
-  left: 200px;
+  width: 100%;
 }
 #shop-div article{
   width: 200px;
   background-color: rgb(0, 153, 0);
-  position: fixed;
-  left: 0;
-  top: 70px;
 }
 
 #shop-div ul{
@@ -178,14 +171,6 @@ section{
   #shop-div{
     flex-direction: column;
     justify-content: flex-start;
-  }
-  #shop-div article{
-    left: 0;
-    top: 70px;
-  }
-  section{
-    top: 100px;
-    left: 0;
   }
   #shop-div article, #shop-div article ul{
     flex-direction: row;
