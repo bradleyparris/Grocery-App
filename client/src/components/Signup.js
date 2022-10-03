@@ -2,21 +2,21 @@ import Auth from '../utils/auth';
 import React, { useState } from 'react';
 import { validateEmail } from '../utils/helpers';
 import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../utils/mutations';
+import { ADD_USER, LOGIN_USER } from '../utils/mutations';
 
 export default function Signup(){
-    const [formState, setFormState] = useState({ username: '', email: '', password: ''});
+    const [formState, setFormState] = useState({ userName: '', email: '', password: ''});
 
     const [addUser, { error }] = useMutation(ADD_USER);
+    const [login] = useMutation(LOGIN_USER);
 
-    const { username, email, password, /*reEnter*/ } = formState;
+    const { userName, email, password, /*reEnter*/ } = formState;
 
     const [errorMessage, setErrorMessage] = useState('');
 
     function handleChange(event) {
         if(event.target.name === 'email'){
             const isValid = validateEmail(event.target.value);
-            console.log(isValid);
 
             if(!isValid) {
                 setErrorMessage('Your email is invalid.');
@@ -34,6 +34,18 @@ export default function Signup(){
         }
     };
 
+    const autoLogin = async () => {
+        try {
+            const { data } = await login({
+                variables: { ...formState }
+            });
+
+            Auth.login(data.login.token);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     const handleSubmit = async event => {
         event.preventDefault();
         try {
@@ -41,8 +53,8 @@ export default function Signup(){
                 variables: { ...formState }
             });
             
-            Auth.login(data.)
-            console.log(data);
+            Auth.login(data.addUser.token);
+            autoLogin();
         } catch (e) {
             console.log(e);
         }
@@ -52,8 +64,8 @@ export default function Signup(){
         <div id='signup-div'>
         <form id='signup-form' onSubmit={handleSubmit}>
             <div>
-                <label htmlFor='username'>Username:</label>
-                <input type='text' name='username' defaultValue={username} onBlur={handleChange} />
+                <label htmlFor='userName'>Username:</label>
+                <input type='text' name='userName' defaultValue={userName} onBlur={handleChange} />
             </div>
             <div>
                 <label htmlFor='email'>Email:</label>
@@ -61,7 +73,7 @@ export default function Signup(){
             </div>
             <div>
                 <label htmlFor='password'>Password:</label>
-                <input type='password' name='password' defaultValue={password}/>
+                <input type='password' name='password' defaultValue={password} onBlur={handleChange}/>
             </div>
             {/* <div>
                 <label htmlFor='reEnterPass'>Re-enter Password:</label>
@@ -74,7 +86,7 @@ export default function Signup(){
             )}
             <button id='signup-button' className='btn' type='submit'>Signup</button>
         </form>
-            {console.log(error) && error && <div>Sign up failed</div>}
+            {error && <div>Sign up failed</div>}
         </div>
     );
 }

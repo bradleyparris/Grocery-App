@@ -11,7 +11,7 @@ export default function Sidebar (props) {
 
     // sets title
     useEffect(() => {
-        document.title = capitalizeFirstLetter(currentCategory.name);
+        document.title = `Paradise - ${capitalizeFirstLetter(currentCategory.name)}`;
     }, [currentCategory]);
 
     return (

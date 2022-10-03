@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Login from '../components/Login';
 import Signup from '../components/Signup';
 
 export default function LogSignModal({ onClose }){
+    useEffect(() => {
+        document.title = 'Paradise - Login/Signup';
+    })
     return(
             <div className='modalContainer'>
                 <div className='login-div'>

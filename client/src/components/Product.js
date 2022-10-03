@@ -6,12 +6,10 @@ import { QUERY_PRODUCE } from '../utils/queries';
 
 export default function Product({category}){
     const { name } = category;
-    const { loading, data } = useQuery(QUERY_PRODUCE);
+    const { data } = useQuery(QUERY_PRODUCE);
     const products = data?.produces || [];
 
     // const currentProducts = products.filter((product) => product.category = name);
-
-    console.log(products);
     return (
         <section>
             <h1>{capitalizeFirstLetter(name)} Section</h1>

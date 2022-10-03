@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
-// import LogSignModal from '../pages/Modal';
+import Auth from '../utils/auth';
 
 import { Link } from 'react-router-dom';
 
 export default function Header(/*props*/){
-    // const {
-    //     accountSelected,
-    //     setAccountSelected
-    // } = props;
+    const logout = event => {
+        event.preventDefault();
+        Auth.logout();
+    }
 
-    // const [isModalOpen, setIsModalOpen] = useState(false);
     const [navMobile, setNavMobile] = useState(false);
-
-    // const toggleModal = () => {
-    //     setIsModalOpen(!isModalOpen);
-    // };
 
     const toggleNav = () => {
         setNavMobile(!navMobile);
@@ -23,7 +18,7 @@ export default function Header(/*props*/){
     return (
         <header>
             <div id='logo-div'>
-                <img id='logo' src={require('../assets/Paradise-Orange.png')}></img>
+                <img id='logo' src={require('../assets/Paradise-Orange.png')} alt='Paradise Orange Logo'></img>
                 <h1 id="webTitle" className=''>Paradise Produce</h1>
             </div>
             <div id='hamburger-btn'>
@@ -36,18 +31,26 @@ export default function Header(/*props*/){
                         Shop
                     </span>
                 </Link>
-                <Link to='/account'>
-                    <span>
-                        Account
-                    </span>
-                </Link>
-                <Link to='/login-or-signup'>
-                    <div id='loginBtn' 
-                        className='btn-div'
-                    >
-                        <span className='' >Login</span>
-                    </div>
-                </Link>
+                {Auth.loggedIn() ? (
+                    <>
+                        <Link to='/account'>
+                            <span>
+                                Account
+                            </span>
+                        </Link>
+                        <a href='/' onClick={logout}>
+                            Logout
+                        </a>
+                    </>
+                ) : (
+                    <Link to='/login-or-signup'>
+                        <div id='loginBtn' 
+                            className='btn-div'
+                        >
+                            <span className='' >Login</span>
+                        </div>
+                    </Link>
+                )}
                 <button className=''>
                     <i className='fa fa-shopping-cart'></i>
                 </button>

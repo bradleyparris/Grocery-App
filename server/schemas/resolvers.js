@@ -1,6 +1,6 @@
-// const { AuthenticationError } = require('apollo-server-express');
+const { AuthenticationError } = require('apollo-server-express');
 // const { User, Thought } = require('../models');
-// const { signToken } = require('../utils/auth');
+const { signToken } = require('../utils/auth');
 const {User, Produce} = require('../models');
 
 const resolvers = {
@@ -44,7 +44,7 @@ const resolvers = {
 
     addProduct: async (parent, args, context) => {
       if (context.user) {
-        const product = await Produce.create({ ...args, consumer: context.user.username });
+        const product = await Produce.create({ ...args, consumer: context.user.userName });
 
         await User.findByIdAndUpdate(
           { _id: context.user._id },
