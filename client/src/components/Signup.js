@@ -5,55 +5,44 @@ import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 
 export default function Signup(){
-    const [formState, setFormState] = useState({ username: '', email: '', password: ''});
+    const [formState, setFormState] = useState({ userName: '', email: '', password: ''});
 
     const [addUser, { error }] = useMutation(ADD_USER);
 
-    const { username, email, password, /*reEnter*/ } = formState;
+    const { userName, email, password, /*reEnter*/ } = formState;
 
     const [errorMessage, setErrorMessage] = useState('');
 
     function handleChange(event) {
-        if(event.target.name === 'email'){
-            const isValid = validateEmail(event.target.value);
-            console.log(isValid);
+        const { name, value } = event.target;
 
-            if(!isValid) {
-                setErrorMessage('Your email is invalid.');
-            } else {
-                if(!event.target.value.length){
-                    setErrorMessage(`${event.target.name} is required.`);
-                } else {
-                    setErrorMessage('');
-                }
-            }
-        }
 
-        if(!errorMessage) {
-            setFormState({ ...formState, [event.target.name]: event.target.value });
-        }
+        setFormState({
+        ...formState,
+        [name]: value,
+        });
     };
 
     const handleSubmit = async event => {
         event.preventDefault();
         try {
             const { data } = await addUser({
-                variables: { ...formState }
+              variables: { ...formState }
             });
-            
-            Auth.login(data.)
-            console.log(data);
-        } catch (e) {
-            console.log(e);
+            Auth.login(data.addUser.token);
+        } catch(e) {
+            //console.log(e);
         }
-    };
+            
+    }
+    
 
     return(
         <div id='signup-div'>
         <form id='signup-form' onSubmit={handleSubmit}>
             <div>
-                <label htmlFor='username'>Username:</label>
-                <input type='text' name='username' defaultValue={username} onBlur={handleChange} />
+                <label htmlFor='userName'>Username:</label>
+                <input type='text' name='userName' defaultValue={userName} onBlur={handleChange} />
             </div>
             <div>
                 <label htmlFor='email'>Email:</label>
@@ -61,7 +50,7 @@ export default function Signup(){
             </div>
             <div>
                 <label htmlFor='password'>Password:</label>
-                <input type='password' name='password' defaultValue={password}/>
+                <input type='password' name='password' defaultValue={password} onBlur={handleChange}/>
             </div>
             {/* <div>
                 <label htmlFor='reEnterPass'>Re-enter Password:</label>
