@@ -33,5 +33,6 @@ module.exports = {
     const payload = { userName, email, _id };
 
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+    
   }
 };
