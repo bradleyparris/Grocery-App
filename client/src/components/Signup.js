@@ -1,3 +1,4 @@
+import Auth from '../utils/auth';
 import React, { useState } from 'react';
 import { validateEmail } from '../utils/helpers';
 import { useMutation } from '@apollo/client';
@@ -39,6 +40,8 @@ export default function Signup(){
             const { data } = await addUser({
                 variables: { ...formState }
             });
+            
+            Auth.login(data.)
             console.log(data);
         } catch (e) {
             console.log(e);
