@@ -8,18 +8,17 @@ const StarchSchema = new Schema({
         trim: true
     },
 
-    // price: {
-    //     type: Integer,
-    //     unique: true,
-    //     required: true
+    price: {
+        type: Number,
+        required: true
 
-    // },
+    },
 
-    // Quantity: {
-    //     type: Integer,
-    //     unique: true,
-    //     required: true
-    // },
+    quantity: {
+        type: Number,
+        unique: true,
+        required: true
+    },
 
     starchDescription: {
         type: String,
@@ -29,6 +28,6 @@ const StarchSchema = new Schema({
     }
 });
 
-const Starch = model('Starch', StarchSchema);
+// const Starch = model('Starch', StarchSchema);
 
-module.exports = Starch;
+module.exports = StarchSchema;

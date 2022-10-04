@@ -3,7 +3,7 @@ const {Schema, model} = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const UserSchema = new Schema({
-    userName: {
+    username: {
         type: String,
         unique: true,
         required: true,
@@ -21,35 +21,10 @@ const UserSchema = new Schema({
         allowNull: false
       },
 
-      produces: [
+      cart: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'Produce'
-        }
-      ],
-
-      dairy: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Dairy'
-        }
-      ],
-      meats: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Meat'
-        }
-      ],
-      starch: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Starch'
-        }
-      ],
-      packagedGoods: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Goods'
+          type: Schema.Types.ObjectId,
+          ref: 'Cart'
         }
       ]
 

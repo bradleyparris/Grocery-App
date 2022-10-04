@@ -5,5 +5,5 @@ const Dairy = require('./Dairy');
 const Meat = require('./Meat');
 const Starch = require('./Starch');
 const Goods = require('./Packaged-goods');
-
-module.exports = {User, Produce, Dairy, Meat, Starch, Goods};
+const Cart = require('./Cart');
+module.exports = {User, Produce, Dairy, Meat, Starch, Goods, Cart};

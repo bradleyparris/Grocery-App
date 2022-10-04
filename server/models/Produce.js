@@ -7,25 +7,15 @@ const ProduceSchema = new Schema({
         required: true,
         trim: true
     },
+    price: {
+       type: Number
 
-    consumer: {
-        type: String,
-        unique: true,
-        trim: true
     },
 
-    // price: {
-    //     type: Integer,
-    //     unique: true,
-    //     required: true
-
-    // },
-
-    // Quantity: {
-    //     type: Integer,
-    //     unique: true,
-    //     required: true
-    // },
+    quantity: {
+        type: Number,
+        required: true
+    },
 
     produceDescription: {
         type: String,
@@ -35,6 +25,6 @@ const ProduceSchema = new Schema({
     }
 });
 
-const Produce = model('Produce', ProduceSchema);
+// const Produce = model('Produce', ProduceSchema);
 
-module.exports = Produce;
+module.exports = ProduceSchema;

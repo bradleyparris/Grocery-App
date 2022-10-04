@@ -8,18 +8,15 @@ const MeatSchema = new Schema({
         trim: true
     },
 
-    // price: {
-    //     type: Integer,
-    //     unique: true,
-    //     required: true
+    price: {
+        type: Number
 
-    // },
+    },
 
-    // Quantity: {
-    //     type: Integer,
-    //     unique: true,
-    //     required: true
-    // },
+    quantity: {
+        type: Number,
+        required: true
+    },
 
     meatDescription: {
         type: String,
@@ -29,6 +26,6 @@ const MeatSchema = new Schema({
     }
 });
 
-const Meat = model('Meat', MeatSchema);
+// const Meat = model('Meat', MeatSchema);
 
-module.exports = Meat;
+module.exports = MeatSchema;

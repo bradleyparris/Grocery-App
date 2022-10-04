@@ -8,18 +8,15 @@ const DairySchema = new Schema({
         trim: true
     },
 
-    // price: {
-    //     type: Integer,
-    //     unique: true,
-    //     required: true
+    price: {
+        type: Number
 
-    // },
+    },
 
-    // Quantity: {
-    //     type: Integer,
-    //     unique: true,
-    //     required: true
-    // },
+    quantity: {
+        type: Number,
+        required: true
+    },
 
     dairyDescription: {
         type: String,
@@ -29,6 +26,6 @@ const DairySchema = new Schema({
     }
 });
 
-const Dairy = model('Dairy', DairySchema);
+// const Dairy = model('Dairy', DairySchema);
 
-module.exports = Dairy;
+module.exports = DairySchema;

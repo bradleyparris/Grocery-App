@@ -8,18 +8,16 @@ const GoodsSchema = new Schema({
         trim: true
     },
 
-    // price: {
-    //     type: Integer,
-    //     unique: true,
-    //     required: true
+    price: {
+        type: Number,
+        required: true
 
-    // },
+    },
 
-    // Quantity: {
-    //     type: Integer,
-    //     unique: true,
-    //     required: true
-    // },
+    quantity: {
+        type: Number,
+        required: true
+    },
 
     GoodsDescription: {
         type: String,
@@ -29,6 +27,6 @@ const GoodsSchema = new Schema({
     }
 });
 
-const Goods = model('Goods', GoodsSchema);
+// const Goods = model('Goods', GoodsSchema);
 
-module.exports = Goods;
+module.exports = GoodsSchema;
