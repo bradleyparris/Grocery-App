@@ -3,6 +3,12 @@ export function capitalizeFirstLetter(string) {
   }
   
   export function validateEmail(email) {
-    var re = /^((\S[^@])*|\w+)(\w+|\-|\-\w+)*@((\w+(\-*\w){1})|\w+)+\.\w{2,}?$/;;
+    var re = /^((\S[^@])*|\w+)(\w+|\-|\-\w+)*@((\w+(\-*\w){1})|\w+)+\.\w{2,}?$/;
     return re.test(String(email).toLowerCase());
   }
+
+export function convertToDecimal(money){
+  money = money.toString();
+  const decimal = `${money.slice(0, money.length - 2)}.${money.slice(money.length - 2)}`;
+  return decimal;
+}

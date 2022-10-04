@@ -1,4 +1,4 @@
-const {User, Produce} = require('../models');
+const {User, Product} = require('../models');
 
 
 const produceController = {
@@ -6,11 +6,11 @@ const produceController = {
 // add produce to user
 addProduce({params, body}, res) {
 console.log(body);
-Produce.create(body)
+Product.create(body)
 .then(({_id}) => {
     return User.findOneAndUpdate(
         {_id: params.userId},
-        {$push: {produces: _id}},
+        {$push: {products: _id}},
         {new: true}
     );
 })

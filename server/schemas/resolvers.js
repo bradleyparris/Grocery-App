@@ -1,19 +1,19 @@
 const { AuthenticationError } = require('apollo-server-express');
 // const { User, Thought } = require('../models');
 const { signToken } = require('../utils/auth');
-const {User, Produce} = require('../models');
+const {User, Product} = require('../models');
 
 
 const resolvers = {
 
   Query: {
-    users: async (parent, {userName}) => {
-      const params = userName ? {userName} : {};
+    users: async (parent, {username}) => {
+      const params = username ? {username} : {};
       return User.find(params)
     },
 
-    produces: async () => {
-      return Produce.find();
+    products: async () => {
+      return Product.find();
     }
 
   },
@@ -45,11 +45,11 @@ const resolvers = {
 
     addProduct: async (parent, args, context) => {
       if (context.user) {
-        const product = await Produce.create({ ...args, consumer: context.user.userName });
+        const product = await Product.create({ ...args, consumer: context.user.username });
 
         await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { produces: product._id } },
+          { $push: { products: product._id } },
           { new: true }
         );
 

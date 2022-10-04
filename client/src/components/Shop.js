@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Product from './Product';
 import Sidebar from './Sidebar';
-import { Route, Link } from 'react-router-dom';
-import { capitalizeFirstLetter } from '../utils/helpers';
+// import { Route, Link } from 'react-router-dom';
+// import { capitalizeFirstLetter } from '../utils/helpers';
 
 export default function Shop(){
     const [categories] = useState([

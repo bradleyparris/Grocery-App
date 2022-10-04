@@ -10,7 +10,7 @@ export default function Signup(){
     const [addUser, { error }] = useMutation(ADD_USER);
     const [login] = useMutation(LOGIN_USER);
 
-    const { userName, email, password, /*reEnter*/ } = formState;
+    const { username, email, password, /*reEnter*/ } = formState;
 
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -64,8 +64,8 @@ export default function Signup(){
         <div id='signup-div'>
         <form id='signup-form' onSubmit={handleSubmit}>
             <div>
-                <label htmlFor='userName'>Username:</label>
-                <input type='text' name='userName' defaultValue={userName} onBlur={handleChange} />
+                <label htmlFor='username'>Username:</label>
+                <input type='text' name='username' defaultValue={username} onBlur={handleChange} />
             </div>
             <div>
                 <label htmlFor='email'>Email:</label>
