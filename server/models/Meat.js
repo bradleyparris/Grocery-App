@@ -3,7 +3,6 @@ const {Schema, model } = require('mongoose');
 const MeatSchema = new Schema({
     meatName: {
         type: String,
-        unique: true,
         required: true,
         trim: true
     },
@@ -20,7 +19,6 @@ const MeatSchema = new Schema({
 
     meatDescription: {
         type: String,
-        unique: true,
         required: true,
         trim: true
     }

@@ -60,29 +60,23 @@ const resolvers = {
 
   Mutation: {
 
-  //   addCart: async (parent, args) => {
-  //     const cart = await Cart.create(args);
-  //     return cart;
-  // },
-  addCart: async (parent, cartName, context) => {
+  addCart: async (parent, {userId, cartname}, context) => {
     if (!context.user) {
-      const cart = await Cart.create(cartName);
-      
+      const cart = await Cart.create({cartname});
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: userId },
+        { $push: { cart: { cartname}[0]} },
+        { new: true, runValidators: true }
+      );
   
-      // await User.findByIdAndUpdate(
-      //   { _id: context.user._id },
-      //   { $push: { thoughts: thought._id } },
-      //   { new: true }
-      // );
-  
-      return cart;
+      return {cart, updatedUser};
     }
   
     // throw new AuthenticationError('You need to be logged in!');
   },
-
+//Similar principle as adding Products to user
     addproducetoCart: async (parent, {cartId, produceName, price, produceDescription, quantity}, context) => {
-      if (!context.user) {
+      if (context.user) {
 
         const updatedCart = await Cart.findOneAndUpdate(
           { _id: cartId },
@@ -93,7 +87,7 @@ const resolvers = {
         return updatedCart;
       }
     
-      // throw new AuthenticationError('You need to be logged in!');
+       throw new AuthenticationError('You need to be logged in!');
     },
     adddairytoCart: async (parent, {cartId, dairyName, price, quantity, dairyDescription}, context) => {
       if (!context.user) {
@@ -207,3 +201,21 @@ const resolvers = {
 };
 
 module.exports = resolvers;
+
+// export const Query = (productName) => {
+//  return( gql`
+//   query Query{
+//     ` + productName + `{
+//       _id,
+//       ` + productName + `Name,
+//       ` + productName + `Description
+//     }     
+//   }
+//   `)
+// } 
+
+
+// export const Query = (cartbyId) =?
+
+//use this function instead of QUERY_PRODUCE
+//then it should work with your category field if you pass this in

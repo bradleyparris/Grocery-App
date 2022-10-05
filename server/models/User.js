@@ -20,13 +20,15 @@ const UserSchema = new Schema({
         required: true,
         allowNull: false
       },
-
-      cart: [
+//ADDED CART MODEL
+      carts: [
         {
           type: Schema.Types.ObjectId,
           ref: 'Cart'
         }
       ]
+      //good for situations for variables
+    // [0]['produce'] == [0].produce
 
 
      

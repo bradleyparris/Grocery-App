@@ -11,11 +11,13 @@ type User {
   
 }
 
+
+
 type Cart {
   _id: ID
-  cartName: String
-  produces: [Produce]
-  dairy: [Dairy]
+  cartname: String
+  // produces: [Produce]
+  // dairy: [Dairy]
   meats: [Meat]
   goods: [Goods]
   starch: [Starch]
@@ -28,21 +30,21 @@ type Auth {
   user: User
 }
 
-type Produce {
-  _id: ID
-  produceName: String
-  price: Float
-  produceDescription: String
-  quantity: Int
-}
+// type Produce {
+//   _id: ID
+//   produceName: String
+//   price: Float
+//   produceDescription: String
+//   quantity: Int
+// }
 
-type Dairy {
-  _id: ID
-  dairyName: String
-  price: Float
-  dairyDescription: String
-  quantity: Int
-}
+// type Dairy {
+//   _id: ID
+//   dairyName: String
+//   price: Float
+//   dairyDescription: String
+//   quantity: Int
+// }
 
 type Meat {
   _id: ID
@@ -70,7 +72,7 @@ type Goods{
 
   type Query {
     me: User
-    cart: [Cart]
+    carts: [Cart]
     cartbyId(_id: ID!): Cart
     users: [User]
     user(_id: ID!): User
@@ -83,8 +85,8 @@ type Goods{
 
   type Mutation {
     login(email: String!, password: String!): Auth
-    addUser(userName: String!, email: String!, password: String!): Auth
-    addCart(cartName: String!): Cart
+    addUser(username: String!, email: String!, password: String!): Auth
+    addCart(userId: ID!, cartname: String!): Cart
     addproducetoCart(cartId: ID!, produceName: String!, price: Float!, produceDescription: String!, quantity: Int!): Cart
     adddairytoCart(cartId: ID!, dairyName: String!, price: Float!, quantity: Int!, dairyDescription: String! ): Cart
     addmeattoCart(cartId: ID!, meatName: String!, price: Float!, quantity: Int!, meatDescription: String! ): Cart

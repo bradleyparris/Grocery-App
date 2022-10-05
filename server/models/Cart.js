@@ -8,25 +8,57 @@ const starchSchema = require('./Starch');
 const CartSchema = new Schema({
 
 
-    cartName: {
+    cartname: {
         type: String,
-        unique: true,
         required: true,
         trim: true
     },
-    
-    produces: [produceSchema],
-    dairy: [dairySchema],
-    meats: [MeatSchema],
-    goods: [GoodsSchema],
-    starch: [starchSchema]
+    //ADDED MODEL FOR ALL OF THESE
+    produces: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Produce'
+        }
+      ],
+
+      dairy: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Dairy'
+        }
+      ],
+      meats: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Meat'
+        }
+      ],
+      starch: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Starch'
+        }
+      ],
+      packagedGoods: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Goods'
+        }
+      ]
+
+
+    // produces: [produceSchema],
+    // dairy: [dairySchema],
+    // meats: [MeatSchema],
+    // goods: [GoodsSchema],
+    // starch: [starchSchema]
   
        
 
 });
-CartSchema.virtual('produceCount').get(function() {
-  return this.produces.length;
- });
+// CartSchema.virtual('produceCount').get(function() {
+//   return this.produces.length;
+//  });
 // CartSchema.virtual('reactionCount').get(function() {
 //   return this.reactions.length;
 // });

@@ -3,7 +3,6 @@ const {Schema, model } = require('mongoose');
 const StarchSchema = new Schema({
     starchName: {
         type: String,
-        unique: true,
         required: true,
         trim: true
     },
@@ -16,13 +15,11 @@ const StarchSchema = new Schema({
 
     quantity: {
         type: Number,
-        unique: true,
         required: true
     },
 
     starchDescription: {
         type: String,
-        unique: true,
         required: true,
         trim: true
     }

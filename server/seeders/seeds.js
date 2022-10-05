@@ -2,7 +2,7 @@
 //Have multiple seeds in this File example user, meat, cheeese
 const mongoose = require('../config/connection');
 const { User, Cart } = require('../models');
-// const Produce = require('../models/Produce');
+//  const Produce = require('../models/Produce');
 
 
 const seedProduce = [
@@ -56,8 +56,8 @@ const seedCart = [
 const seedDB = async () => {
     // await Produce.deleteMany({});
     // await Produce.insertMany(seedProduce);
-    await Cart.deleteMany({});
-    await Cart.insertMany(seedCart);
+    // await Produce.deleteMany({});
+    // await Cart.insertMany(seedCart);
 };
 
 seedDB().then(() => {

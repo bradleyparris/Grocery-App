@@ -3,7 +3,6 @@ const {Schema, model } = require('mongoose');
 const ProduceSchema = new Schema({
     produceName: {
         type: String,
-        unique: true,
         required: true,
         trim: true
     },
@@ -19,7 +18,6 @@ const ProduceSchema = new Schema({
 
     produceDescription: {
         type: String,
-        unique: true,
         required: true,
         trim: true
     }

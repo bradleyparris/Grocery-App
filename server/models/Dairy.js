@@ -3,7 +3,6 @@ const {Schema, model } = require('mongoose');
 const DairySchema = new Schema({
     dairyName: {
         type: String,
-        unique: true,
         required: true,
         trim: true
     },
@@ -20,7 +19,6 @@ const DairySchema = new Schema({
 
     dairyDescription: {
         type: String,
-        unique: true,
         required: true,
         trim: true
     }
