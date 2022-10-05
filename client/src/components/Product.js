@@ -11,7 +11,7 @@ export default function Product({category}){
 
     const currentProducts = products.filter((product) => product.category === name);
 
-    function cart(product){
+    function handleAddToCart(product){
         let cartArr = [];
         cartArr.push(product);
         console.log(cartArr);
@@ -30,7 +30,7 @@ export default function Product({category}){
                         <h4 className='product-name'>{capitalizeFirstLetter(product.name)}</h4>
                         <div className='container-product'>
                             <p className='product-price'>${convertToDecimal(product.price)}</p>
-                            <span className='add-to-cart' onClick={cart(product)}>Add to Cart</span>
+                            <span className='add-to-cart' onClick={handleAddToCart(product)}>Add to Cart</span>
                         </div>
                     </div>
                 ))}
