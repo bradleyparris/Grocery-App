@@ -4,7 +4,11 @@ import Sidebar from './Sidebar';
 // import { Route, Link } from 'react-router-dom';
 // import { capitalizeFirstLetter } from '../utils/helpers';
 
-export default function Shop(){
+export default function Shop(props){
+    const {
+        setCart,
+        cart
+    } = props;
     const [categories] = useState([
         {
             name: "dairy", 
@@ -29,7 +33,7 @@ export default function Shop(){
                 currentCategory={currentCategory}
                 setCurrentCategory={setCurrentCategory}
             ></Sidebar>
-            <Product category={currentCategory}></Product>
+            <Product category={currentCategory} setCart={setCart} cart={cart}></Product>
         </div>
     )
 }

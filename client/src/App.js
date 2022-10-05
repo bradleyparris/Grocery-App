@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Shop from './components/Shop';
+import Cart from './components/Cart';
 import AccountInfo from './pages/Account';
 import LogSignModal from './pages/LoginSignup';
 import NoMatch from './pages/NoMatch';
@@ -29,15 +30,20 @@ const client = new ApolloClient({
 });
 
 function App() {
-    const [accountSelected, setAccountSelected] = useState();
+    // const [accountSelected, setAccountSelected] = useState();
+    const [cartSelected, setCartSelected] = useState(false);
+    const cartInitialState = [];
+    const [cart, setCart] = useState(cartInitialState);
 
     return (
         <ApolloProvider client={client}>
             <Router>
                 <div className='body-div'>
                     <Header
-                    accountSelected={accountSelected}
-                    setAccountSelected={setAccountSelected}
+                    // accountSelected={accountSelected}
+                    // setAccountSelected={setAccountSelected}
+                    // cartSelected={cartSelected}
+                    setCartSelected={setCartSelected}
                     ></Header>
                     <main>
                     <Routes>
@@ -47,7 +53,7 @@ function App() {
                         />
                         <Route
                             path='/'
-                            element={<Shop />}
+                            element={<Shop setCart={setCart} cart={cart}/>}
                         />
                         <Route
                             path='/account'
@@ -58,6 +64,7 @@ function App() {
                             element={<NoMatch />}
                         />
                     </Routes>
+                    <Cart setCartSelected={setCartSelected} cartSelected={cartSelected} cart={cart}/>
                     </main>
                 </div>
             </Router>

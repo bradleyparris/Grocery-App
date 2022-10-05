@@ -3,7 +3,11 @@ import Auth from '../utils/auth';
 
 import { Link } from 'react-router-dom';
 
-export default function Header(/*props*/){
+export default function Header(props){
+    const {
+        setCartSelected
+    } = props;
+
     const logout = event => {
         event.preventDefault();
         Auth.logout();
@@ -15,6 +19,9 @@ export default function Header(/*props*/){
         setNavMobile(!navMobile);
     };
 
+    const toggleModal = () => {
+        setCartSelected(true);
+    }
     return (
         <header>
             <div id='logo-div'>
@@ -51,7 +58,7 @@ export default function Header(/*props*/){
                         </div>
                     </Link>
                 )}
-                <button className=''>
+                <button className='' onClick={(toggleModal)}>
                     <i className='fa fa-shopping-cart'></i>
                 </button>
             </nav>
