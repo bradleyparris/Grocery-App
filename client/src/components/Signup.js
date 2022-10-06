@@ -1,23 +1,28 @@
+import Auth from '../utils/auth';
 import React, { useState } from 'react';
 import { validateEmail } from '../utils/helpers';
+import { useMutation } from '@apollo/client';
+import { ADD_USER, LOGIN_USER } from '../utils/mutations';
 
 export default function Signup(){
-    const [formState, setFormState] = useState({ username: '', email: '', password: '', reEnter: '' });
+    const [formState, setFormState] = useState({ username: '', email: '', password: ''});
 
-    const { username, email, password, reEnter } = formState;
+    const [addUser, { error }] = useMutation(ADD_USER);
+    const [login] = useMutation(LOGIN_USER);
+
+    const { username, email, password, /*reEnter*/ } = formState;
 
     const [errorMessage, setErrorMessage] = useState('');
 
-    function handleChange(e) {
-        if(e.target.name === 'email'){
-            const isValid = validateEmail(e.target.value);
-            console.log(isValid);
+    function handleChange(event) {
+        if(event.target.name === 'email'){
+            const isValid = validateEmail(event.target.value);
 
             if(!isValid) {
                 setErrorMessage('Your email is invalid.');
             } else {
-                if(!e.target.value.length){
-                    setErrorMessage(`${e.target.name} is required.`);
+                if(!event.target.value.length){
+                    setErrorMessage(`${event.target.name} is required.`);
                 } else {
                     setErrorMessage('');
                 }
@@ -25,16 +30,38 @@ export default function Signup(){
         }
 
         if(!errorMessage) {
-            setFormState({ ...formState, [e.target.name]: e.target.value });
+            setFormState({ ...formState, [event.target.name]: event.target.value });
         }
     };
 
-    function handleSubmit(e){
-        e.preventDefault();
-        console.log(formState);
+    const autoLogin = async () => {
+        try {
+            const { data } = await login({
+                variables: { ...formState }
+            });
+
+            Auth.login(data.login.token);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    const handleSubmit = async event => {
+        event.preventDefault();
+        try {
+            const { data } = await addUser({
+                variables: { ...formState }
+            });
+            
+            Auth.login(data.addUser.token);
+            autoLogin();
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     return(
+        <div id='signup-div'>
         <form id='signup-form' onSubmit={handleSubmit}>
             <div>
                 <label htmlFor='username'>Username:</label>
@@ -46,13 +73,20 @@ export default function Signup(){
             </div>
             <div>
                 <label htmlFor='password'>Password:</label>
-                <input type='password' name='password' defaultValue={password}/>
+                <input type='password' name='password' defaultValue={password} onBlur={handleChange}/>
             </div>
-            <div>
+            {/* <div>
                 <label htmlFor='reEnterPass'>Re-enter Password:</label>
                 <input type='password' name='reEnterPass' defaultValue={reEnter}/>
-            </div>
+            </div> */}
+            {errorMessage && (
+                <div className='error-div'>
+                    <p className='error-text'>{errorMessage}</p>
+                </div>
+            )}
             <button id='signup-button' className='btn' type='submit'>Signup</button>
         </form>
+            {error && <div>Sign up failed</div>}
+        </div>
     );
 }

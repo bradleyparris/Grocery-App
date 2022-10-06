@@ -2,60 +2,49 @@
 const {Schema, model} = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const UserSchema = new Schema({
-    userName: {
-        type: String,
-        unique: true,
-        required: true,
-        trim: true
-      },
-      email: {
-        type: String,
-        unique: true,
-        required: true,
-        match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/, 'Please fill a valid email address']
-      },
-      password: {
-        type: String,
-        required: true,
-        allowNull: false
-      },
-
-      produces: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Produce'
-        }
-      ],
-
-      dairy: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Dairy'
-        }
-      ],
-      meats: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Meat'
-        }
-      ],
-      starch: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Starch'
-        }
-      ],
-      packagedGoods: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Goods'
-        }
-      ]
+const UserSchema = new Schema(
+  {
+    username: {
+      type: String,
+      unique: true,
+      required: true,
+      trim: true
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+      match: [/^((\S[^@])*|\w+)(\w+|\-|\-\w+)*@((\w+(\-*\w){1})|\w+)+\.\w{2,}?$/, 'Please fill a valid email address']
+    },
+    password: {
+      type: String,
+      required: true,
+      allowNull: false
+    },
+    orders: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Order'
+      }
+    ],
+    cartItems: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Product'
+      }
+    ]  
+  },
+  {
+    toJSON: {
+        virtuals: true
+    }
+  }
+);
 
 
-     
-});
+UserSchema.virtual('itemCount').get(function() {
+  return this.cartItems.length
+})
 
 // set up pre-save middleware to create password
 UserSchema.pre('save', async function(next) {

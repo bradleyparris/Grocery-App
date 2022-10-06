@@ -1,27 +1,29 @@
 const {Schema, model } = require('mongoose');
 
-const GoodsSchema = new Schema({
-    GoodsName: {
+const ProductSchema = new Schema({
+    name: {
         type: String,
         unique: true,
         required: true,
         trim: true
     },
 
-    // price: {
-    //     type: Integer,
-    //     unique: true,
-    //     required: true
+    price: {
+        type: Number,
+        required: true
+    },
 
-    // },
-
+    category: {
+        type: String,
+        required: true
+    },
     // Quantity: {
     //     type: Integer,
     //     unique: true,
     //     required: true
     // },
 
-    GoodsDescription: {
+    description: {
         type: String,
         unique: true,
         required: true,
@@ -29,6 +31,6 @@ const GoodsSchema = new Schema({
     }
 });
 
-const Goods = model('Goods', GoodsSchema);
+const Product = model('Product', ProductSchema);
 
-module.exports = Goods;
+module.exports = Product;

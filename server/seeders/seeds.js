@@ -1,44 +1,71 @@
 //Meant for seeding database
 //Have multiple seeds in this File example user, meat, cheeese
 const mongoose = require('../config/connection');
-const { User } = require('../models');
-const Produce = require('../models/Produce');
+const { User, Product } = require('../models');
 
 
-const seedProduce = [
+const seedProduct = [
     {
-        produceName: 'tomatoes',
-        produceDescription: 'Red juicy'
+        name: 'tomatoes',
+        price: 220,
+        category: 'produce',
+        description: 'Red juicy'
     },
     {
-        produceName: 'lettuce',
-        produceDescription: 'Iceberg Lettuce'
+        name: 'lettuce',
+        price: 220,
+        category: 'produce',
+        description: 'Iceberg Lettuce'
     },
     {
-        produceName: 'Apples',
-        produceDescription: 'Red Organic Apples'
+        name: 'Apples',
+        price: 330,
+        category: 'produce',
+        description: 'Red Organic Apples'
     },
     {
-        produceName: 'Potatoes',
-        produceDescription: 'Red skin Potatoes'
+        name: 'Potatoes',
+        price: 540,
+        category: 'produce',
+        description: 'Red skin Potatoes'
     },
     {
-        produceName: 'Avocado',
-        produceDescription: 'Ripped for the taking!'
+        name: 'Avocado',
+        price: 130,
+        category: 'produce',
+        description: 'Ripped for the taking!'
+    },
+    {
+        name: 'Milk',
+        price: 550,
+        category: 'dairy',
+        description: 'tasty white drink'
+    },
+    {
+        name: 'Steak',
+        price: 1000,
+        category: 'meat',
+        description: 'When cooked, a very delicious meal!'
+    },
+    {
+        name: 'Raspberry Cheesecake',
+        price: 1000,
+        category: 'dessert',
+        description: 'Great for any cheesecake lover!'
     }
 ];
 
 const seedUser = [
     {
-        userName: 'Ricardo',
+        username: 'Ricardo',
         email: 'ricardo@gmail.com',
         password: 'password1234'
     }
 ]
 
 const seedDB = async () => {
-    await Produce.deleteMany({});
-    await Produce.insertMany(seedProduce);
+    await Product.deleteMany({});
+    await Product.insertMany(seedProduct);
     await User.deleteMany({});
     await User.insertMany(seedUser);
 };

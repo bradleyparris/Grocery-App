@@ -1,10 +1,12 @@
-import React from 'react';
-import Login from './Login';
-import Signup from './Signup';
+import React, { useEffect } from 'react';
+import Login from '../components/Login';
+import Signup from '../components/Signup';
 
 export default function LogSignModal({ onClose }){
+    useEffect(() => {
+        document.title = 'Paradise - Login/Signup';
+    })
     return(
-        <div className='modalBackdrop'>
             <div className='modalContainer'>
                 <div className='login-div'>
                     <h3 className='login-title title'>Login Form</h3>
@@ -17,6 +19,5 @@ export default function LogSignModal({ onClose }){
                 </div>
                 <button onClick={onClose} type='button'>Close</button>
             </div>
-        </div>
     );
 }
