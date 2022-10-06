@@ -20,29 +20,28 @@ export default function Product(props){
         count = count + 1;
         addItemToCart({
             cartItemId: count,
-            item: {
-                _id: product._id,
-                name: product.name,
-                price: product.price,
-                cateogry: product.category,
-                description: product.description
-            }
+            _id: product._id,
+            name: product.name,
+            price: product.price,
+            category: product.category
         });
     }
     const addItemToCart = async (item) => {
-        // setCart(current => [...current, item]);
-        console.log(item.item);
-        item = item.item;
-        if(Auth.loggedIn()){
-            try {
-                const { data } = await addItem({
-                    variables: {...item}
-                });
-                Auth.getToken(data.addItem.token);
-            } catch(e) {
-                console.error(e);
-            }
-        }
+        setCart(current => [...current, item]);
+        // console.log(`Name: ${item.name}
+        // Price: ${item.price}
+        // Item ID: ${item._id}
+        // `);
+        // if(Auth.loggedIn()){
+        //     try {
+        //         const { data } = await addItem({
+        //             variables: {...item}
+        //         });
+        //         Auth.getToken(data.addItem);
+        //     } catch(e) {
+        //         console.error(e);
+        //     }
+        // }
     };
 
     return (

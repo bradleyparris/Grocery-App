@@ -2,8 +2,9 @@ import decode from 'jwt-decode';
 
 class AuthService{
     // retrieve data saved in token
-    getItem(){
-        return decode(this.getToken());
+    setToken(idToken){
+        const decoded = decode()
+        sessionStorage.setItem('id_token', idToken);
     }
 
     // check if user is still logged in

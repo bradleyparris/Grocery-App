@@ -6,8 +6,7 @@ type User {
   _id: ID
   username: String
   email: String
-  orders: [Cart]
-  cartItems: [Product]
+  password: String
 }
 
 type Product {
@@ -18,23 +17,17 @@ type Product {
   description: String
 }
 
-type Cart {
-  _id: ID
-  itemCount: Int
-  cartItems: [Product]
-}
-
   type Query {
     users: [User]
     user(_id: ID!): User
     products: [Product]
     product(_id: ID!): Product
-    queryCartItems(_id: ID!): User
+
   }
   type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    addCartItem(_id: ID!, name: String!, price: Float!, category: String!): Product
+    addProduct(name: String!, consumer: String, description: String!, category: String!): Product
   }
   type Auth {
     token: ID!

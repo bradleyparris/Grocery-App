@@ -29,8 +29,8 @@ const UserSchema = new Schema(
     ],
     cartItems: [
       {
-          type: Schema.Types.ObjectId,
-          ref: 'Product'
+        type: Schema.Types.ObjectId,
+        ref: 'Product'
       }
     ]  
   },
