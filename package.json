@@ -2,12 +2,12 @@
   "name": "paradise-produce",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start:dev": "concurrently \"cd server && npm run server\" \"cd client && npm run dev\"",
-    "start": "concurrently \"cd client && npm start\" \"cd server && npm run watch\"",
+    "start": "node server/server.js",
     "server": "cd server nodemon server.js --ignore client",
-    "build": "cd client && npm start",
+    "build": "cd client && npm run build",
     "client": "cd client && npm start",
     "install": "concurrently \"cd server && npm install\" \"cd client && npm install\""
   },
