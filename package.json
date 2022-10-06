@@ -1,0 +1,27 @@
+{
+  "name": "paradise-produce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "concurrently \"cd server && npm run server\" \"cd client && npm run dev\"",
+    "start": "concurrently \"cd client && npm start\" \"cd server && npm run watch\"",
+    "server": "cd server nodemon server.js --ignore client",
+    "build": "cd client && npm start",
+    "client": "cd client && npm start",
+    "install": "concurrently \"cd server && npm install\" \"cd client && npm install\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bradleyparris/Paradise-Produce.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bradleyparris/Paradise-Produce/issues"
+  },
+  "homepage": "https://github.com/bradleyparris/Paradise-Produce#readme",
+  "dependencies": {
+    "concurrently": "^7.4.0"
+  }
+}
