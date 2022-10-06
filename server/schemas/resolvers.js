@@ -1,21 +1,26 @@
 const { AuthenticationError } = require('apollo-server-express');
 // const { User, Thought } = require('../models');
 const { signToken } = require('../utils/auth');
-const {User, Product} = require('../models');
+const {User, Product, Cart} = require('../models');
+const { populate } = require('../models/User');
 
 
 const resolvers = {
 
   Query: {
-    users: async (parent, {username}) => {
-      const params = username ? {username} : {};
-      return User.find(params)
+    users: async () => {
+      return User.find()
+        .select('-__v -password')
+        .populate('cartItems');
     },
 
     products: async () => {
       return Product.find();
+    },
+    queryCartItems: async (parent, { _id }) => {
+      const user = await User.findOne({ _id });
+      return user.cartItems;
     }
-
   },
   Mutation: {
     //Have a signed token with users data
@@ -43,13 +48,18 @@ const resolvers = {
       return {token, user};
     },
 
-    addProduct: async (parent, args, context) => {
+    addCartItem: async (parent, args, context) => {
       if (context.user) {
-        const product = await Product.create({ ...args, consumer: context.user.username });
+        const { _id, name, price, category} = args;
+        const product = await Product.findById({ _id, consumer: context.user.username });
 
         await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { products: product._id } },
+          { $push: { cartItems: {
+            _id: _id,
+            name: name,
+            price: price,
+            category: category } } },
           { new: true }
         );
 
@@ -57,7 +67,20 @@ const resolvers = {
       }
 
       throw new AuthenticationError('You need to be logged in!');
-    }
+    },
+    // updateUser: async (parent, args, context) => {
+    //   if(context.user){
+    //     await User.findOneAndUpdate(
+    //       { _id: context.user._id},
+    //       { cart: args}
+    //     )
+    //   }
+    // }
+    // addCart: async (parent, args, context) => {
+    //   if(context.user){
+    //     const cart = await Cart.create({ ...args, consume: context.user.})
+    //   }
+    // }
 }
 };
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import { capitalizeFirstLetter, convertToDecimal } from '../utils/helpers';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { QUERY_PRODUCT } from '../utils/queries';
-
+import { ADD_CARTITEM } from '../utils/mutations';
+import Auth from '../utils/auth';
 
 let count = 0;
 
@@ -10,6 +11,7 @@ export default function Product(props){
     const { category, setCart, cart } = props;
     const { name } = category;
     const { data } = useQuery(QUERY_PRODUCT);
+    const [addItem] = useMutation(ADD_CARTITEM);
     const products = data?.products || [];
 
     const currentProducts = products.filter((product) => product.category === name);
@@ -18,14 +20,29 @@ export default function Product(props){
         count = count + 1;
         addItemToCart({
             cartItemId: count,
-            name: product.name,
-            price: product.price,
-            cateogry: product.category,
-            description: product.description
+            item: {
+                _id: product._id,
+                name: product.name,
+                price: product.price,
+                cateogry: product.category,
+                description: product.description
+            }
         });
     }
-    const addItemToCart = item => {
-        setCart(current => [...current, item]);
+    const addItemToCart = async (item) => {
+        // setCart(current => [...current, item]);
+        console.log(item.item);
+        item = item.item;
+        if(Auth.loggedIn()){
+            try {
+                const { data } = await addItem({
+                    variables: {...item}
+                });
+                Auth.getToken(data.addItem.token);
+            } catch(e) {
+                console.error(e);
+            }
+        }
     };
 
     return (

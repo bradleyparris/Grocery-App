@@ -24,3 +24,14 @@ export const ADD_USER = gql`
         }
     }
 `;
+
+export const ADD_CARTITEM = gql`
+    mutation addCartItem($id: ID!, $name: String!, $price: Float!, $category: String!) {
+        addCartItem(_id: $id, name: $name, price: $price, category: $category){
+            _id
+            name
+            price
+            category
+        }
+    }
+`;
