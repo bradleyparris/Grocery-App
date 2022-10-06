@@ -55,19 +55,9 @@ const seedProduct = [
     }
 ];
 
-const seedUser = [
-    {
-        username: 'Ricardo',
-        email: 'ricardo@gmail.com',
-        password: 'password1234'
-    }
-]
-
 const seedDB = async () => {
     await Product.deleteMany({});
     await Product.insertMany(seedProduct);
-    await User.deleteMany({});
-    await User.insertMany(seedUser);
 };
 
 seedDB().then(() => {
