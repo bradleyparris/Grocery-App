@@ -50,7 +50,7 @@ export default function Login(){
         <form id='login-form' onSubmit={handleSubmit}>
             <div>
                 <label htmlFor='email'>Email:</label>
-                <input type='text' name='email' defaultValue={email} onBlur={handleChange} />
+                <input type='email' name='email' defaultValue={email} onBlur={handleChange} />
             </div>
             <div>
                 <label htmlFor='password'>Password:</label>
