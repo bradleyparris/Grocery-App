@@ -49,12 +49,12 @@ export default function Login(){
     return(
         <form id='login-form' onSubmit={handleSubmit}>
             <div>
-                <label htmlFor='email'>Email:</label>
-                <input type='email' name='email' defaultValue={email} onBlur={handleChange} />
+                <label htmlFor='login-email'>Email:</label>
+                <input type='email' name='login-email' defaultValue={email} onBlur={handleChange} />
             </div>
             <div>
-                <label htmlFor='password'>Password:</label>
-                <input type='password' name='password' defaultValue={password} onBlur={handleChange} />
+                <label htmlFor='login-password'>Password:</label>
+                <input type='password' name='login-password' defaultValue={password} onBlur={handleChange} />
             </div>
             <button id='login-button' className='btn' type='submit'>Login</button>
         </form>

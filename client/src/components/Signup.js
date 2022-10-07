@@ -68,12 +68,12 @@ export default function Signup(){
                 <input type='text' name='username' defaultValue={username} onBlur={handleChange} />
             </div>
             <div>
-                <label htmlFor='email'>Email:</label>
-                <input type='email' name='email' defaultValue={email} onBlur={handleChange}/>
+                <label htmlFor='signup-email'>Email:</label>
+                <input type='email' name='signup-email' defaultValue={email} onBlur={handleChange}/>
             </div>
             <div>
-                <label htmlFor='password'>Password:</label>
-                <input type='password' name='password' defaultValue={password} onBlur={handleChange}/>
+                <label htmlFor='signup-password'>Password:</label>
+                <input type='password' name='signup-password' defaultValue={password} onBlur={handleChange}/>
             </div>
             {/* <div>
                 <label htmlFor='reEnterPass'>Re-enter Password:</label>
