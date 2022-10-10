@@ -1,8 +1,4 @@
  # Paradise Produce
-
-   
-  ## Table-of-Contents
-  * [Description](#description)
  
   
   ## [Description](#table-of-contents)
