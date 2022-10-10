@@ -3,7 +3,6 @@
    
   ## Table-of-Contents
   * [Description](#description)
-  * [Contributers](#contributing)
  
   
   ## [Description](#table-of-contents)
